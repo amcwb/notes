@@ -30,7 +30,7 @@ class Editing {
                 <li class="subject list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="${key}">
                     ${subject.name}
                     <div>
-                        <i class="edit material-icons btn">edit</i>
+                        <i class="edit material-icons btn" data-edits="${key}">edit</i>
                         <i class="delete material-icons btn btn-danger" data-deletes="${key}">delete</i>
                     </div>
                 </li>`);
@@ -51,8 +51,8 @@ class Editing {
                 $("#new-note").before(`
                     <li class="note list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="${key}">
                         ${note.name}
-                        <i class="edit material-icons btn">edit</i>
-                    </li>`);   
+                        <i class="edit material-icons btn" data-edits="${key}">edit</i>
+                    </li>`);
             }
         }
         

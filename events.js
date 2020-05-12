@@ -54,6 +54,40 @@ function start () {
             editing.chooseNote(id);
         })
     });
+    
+    $("#subjects").on("click", ".edit", function () {
+        let id = $(this).data("edits");
+        bootbox.prompt("Pick a new name for your subject...", function (result) {
+            if (result !== null) {
+                let name = result;
+                editing.data.subjects[editing.currentSubject].name = name;
+                
+                editing.save();
+                editing.displaySubjects();
+                editing.chooseSubject(id);
+                
+                if (editing.currentNote !== null) {
+                    editing.chooseNote(editing.currentNote);   
+                }
+            }
+        });
+    });
+    
+    $("#notes").on("click", ".edit", function () {
+        let id = $(this).data("edits");
+        bootbox.prompt("Pick a new name for your note...", function (result) {
+            if (result !== null) {
+                let name = result;
+                editing.data.subjects[editing.currentSubject].notes[id].name = name;
+                
+                editing.save();
+                editing.destroyEditor();
+                editing.displaySubjects();
+                editing.chooseSubject(editing.currentSubject);
+                editing.chooseNote(id);
+            }
+        });
+    });
 
     // Pick top subject
     $(".subject").first().click();
