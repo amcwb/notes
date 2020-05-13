@@ -5,10 +5,11 @@
     <title>Notes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/themes/beagle.css">
+<!--    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/themes/tim.css">-->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor-tables@latest/dist/css/medium-editor-tables.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
@@ -23,7 +24,7 @@
     </div>
     <div id="interface" class="d-none">
         <div class="row">
-            <div class="col-md-3 pr-0 vh-100 border-right overflow-y-auto">
+            <div class="col-md-3 p-0 vh-100 border-right overflow-y-auto" id="subjects">
                 <h3 class="py-3 pl-3">Subjects</h3>
                 <ul class="list-group list-group-flush" id="subjects">
                     <li class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center" id="new-subject">
@@ -32,7 +33,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-2 p-0 vh-100 border-right overflow-y-auto" id="columns">
+            <div class="col-md-2 p-0 vh-100 border-right overflow-y-auto" id="sections">
                 <h3 class="py-3 pl-3">Sections</h3>
                 <div class="center overflow-scroll" id="no-subject">
                     <div style="text-align: center;">
@@ -48,7 +49,48 @@
                 </ul>
             </div>
             <div class="col-md-7 p-0 vh-100 d-flex flex-column" id="editing">
-                <div class="editable pl-3 pt-3 flex-grow-1 overflow-y-auto" contenteditable="true"></div>
+                <div class="editable d-none row" id="toolbar">
+                    <div class="toolbar-button border-right unselectable" data-action="bold" unselectable>
+                        <i class="material-icons">format_bold</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="italic" unselectable>
+                        <i class="material-icons">format_italic</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="underline" unselectable>
+                        <i class="material-icons">format_underline</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="strikethrough" unselectable>
+                        <i class="material-icons">format_strikethrough</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="append-h1" unselectable>
+                        H1
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="append-h2" unselectable>
+                        H2
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="append-h3" unselectable>
+                        H3
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="insertunorderedlist" unselectable>
+                        <i class="material-icons">format_list_bulleted</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="insertorderedlist" unselectable>
+                        <i class="material-icons">format_list_numbered</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="justifyCenter" unselectable>
+                        <i class="material-icons">format_align_center</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="justifyFull" unselectable>
+                        <i class="material-icons">format_align_justify</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="justifyLeft" unselectable>
+                        <i class="material-icons">format_align_left</i>
+                    </div>
+                    <div class="toolbar-button border-right unselectable" data-action="justifyRight" unselectable>
+                        <i class="material-icons">format_align_right</i>
+                    </div>
+                </div>
+                <div class="editable px-3 mr-3 pt-3 flex-grow-1 overflow-y-auto border-top d-none" contenteditable="true" id="target"></div>
                 <div class="center overflow-scroll" id="not-editing">
                     <div style="text-align: center;">
                         <i class="material-icons md-96">help</i><br><br>
@@ -57,7 +99,7 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-center p-3 border-top">
                     <small class="text-muted align-text-center">All your content is auto-saved <span id="last-saved"></span></small>
-                    <button class="btn btn-danger mr-3" id="delete">
+                    <button class="btn btn-danger" id="delete">
                         Delete <i class="material-icons">delete</i>
                     </button>
                 </div>
@@ -73,5 +115,6 @@
     <script src="editing.js"></script>
     <script src="events.js"></script>
     <script src="accept.js"></script>
+    <script src="toolbar.js"></script>
 </body>
 </html>

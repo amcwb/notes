@@ -159,26 +159,27 @@ class Editing {
     
     
     createEditor () {
-        $(".editable").show();
+        $("#target").removeClass("d-none");
+        $("#toolbar").removeClass("d-none");
         
-        this.editor = new MediumEditor('.editable', {
-            toolbar: {
-              buttons: [
-                  'bold',
-                  'italic',
-                  'underline',
-                  'subscript',
-                  'superscript',
-                  'orderedlist',
-                  'unorderedlist',
-                  'anchor',
-                  'h1',
-                  'h2',
-                  'h3',
-                  'quote',
-                  'table'
-              ]
-            },
+        this.editor = new MediumEditor('#target', {
+            toolbar: false, /* {
+                buttons: [
+                    'bold',
+                    'italic',
+                    'underline',
+                    'subscript',
+                    'superscript',
+                    'orderedlist',
+                    'unorderedlist',
+                    'anchor',
+                    'h1',
+                    'h2',
+                    'h3',
+                    'quote',
+                    'table'
+                ],
+            }, */
             keyboardCommands: {
                 /* This example includes the default options for keyboardCommands,
                    if nothing is passed this is what it used */
@@ -217,10 +218,10 @@ class Editing {
         
         if (content !== null) {
             // Load previous data
-            $(".editable").html(content)
+            $("#target").html(content)
         } else {
             // Default data
-            $(".editable").html("<p>Get started by writing here!</p>")
+            $("#target").html("<p>Get started by writing here!</p>")
         }
         
         let that = this;
@@ -229,7 +230,7 @@ class Editing {
             let date = new Date();
 
             $("#last-saved").text("(last saved: " + date.toLocaleString() + ")");
-            localStorage.setItem("content-" + that.currentNote, $(".editable").html());
+            localStorage.setItem("content-" + that.currentNote, $("#target").html());
         });
         
         $("#not-editing").hide();
@@ -244,8 +245,9 @@ class Editing {
 
         if (this.editor !== null) {
             $("#last-saved").text("");
-            $(".editable").html("")
-            $(".editable").hide();
+            $("#target").html("")
+            $("#target").addClass("d-none");
+            $("#toolbar").addClass("d-none");
         
             
             this.editor.destroy();

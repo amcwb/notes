@@ -1,3 +1,4 @@
+let editing;
 
 function start () {
     editing = new Editing();
@@ -91,5 +92,4 @@ function start () {
 
     // Pick top subject
     $(".subject").first().click();
-    editing.displayNotes();
 }
