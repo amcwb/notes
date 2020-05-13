@@ -92,4 +92,5 @@ function start () {
 
     // Pick top subject
     $(".subject").first().click();
+    editing.displayNotes();
 }

@@ -178,6 +178,7 @@ class Editing {
     createEditor () {
         $("#target").removeClass("d-none");
         $("#toolbar").removeClass("d-none");
+        $("#control").removeClass("d-none").addClass("d-flex");
         
         this.editor = new MediumEditor('#target', {
             toolbar: false, /* {
@@ -265,6 +266,7 @@ class Editing {
             $("#target").html("")
             $("#target").addClass("d-none");
             $("#toolbar").addClass("d-none");
+            $("#control").removeClass("d-flex").addClass("d-none");
         
             
             this.editor.destroy();
