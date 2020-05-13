@@ -1,3 +1,16 @@
+// https://stackoverflow.com/a/890829
+function keys(obj) {
+    var keys = [];
+
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key)) {
+            keys.push(key);
+        }
+    }
+
+    return keys;
+}
+
 class Editing {
     constructor () {
         this.currentSubject = null;
@@ -24,7 +37,9 @@ class Editing {
     
     displaySubjects () {
         $(".subject").remove();
-        for (var key in this.data.subjects) {
+        let k = keys(this.data.subjects).sort();
+        for (var i = 0; i < k.length; i++) {
+            let key = k[i];
             let subject = this.data.subjects[key];
             $("#new-subject").before(`
                 <li class="subject list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="${key}">
@@ -46,7 +61,9 @@ class Editing {
         } else {
             $("#no-subject").addClass("d-none");
             $("#new-note").addClass("d-flex").removeClass("d-none");
-            for (var key in this.data.subjects[this.currentSubject].notes) {
+            let k = keys(this.data.subjects[this.currentSubject].notes).sort();
+            for (var i = 0; i < k.length; i++) {
+                let key = k[i];
                 let note = this.data.subjects[this.currentSubject].notes[key];
                 $("#new-note").before(`
                     <li class="note list-group-item list-group-item-action d-flex justify-content-between align-items-center" id="${key}">
