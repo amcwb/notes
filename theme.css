@@ -20,6 +20,14 @@
    user-select: none;
 }
 
-.row {
-    margin: 0;
+
+.toolbar-button {
+    padding: 10px;
+    cursor: pointer;
 }
+
+.toolbar-button:hover {
+    background-color: black;
+    color: white;
+}
+

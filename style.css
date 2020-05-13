@@ -52,12 +52,7 @@ html, body {
     overflow-y: auto;
 }
 
-.toolbar-button {
-    padding: 10px;
-    cursor: pointer;
-}
 
-.toolbar-button:hover {
-    background-color: black;
-    color: white;
+.row {
+    margin: 0;
 }
