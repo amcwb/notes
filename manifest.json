@@ -1,0 +1,26 @@
+{
+    "name": "Notes by stars",
+    "short_name": "Notes",
+    "start_url": "index.html",
+    "scope": "./",
+    "icons": [
+      {
+        "src": "192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      },
+      {
+        "src": "128x128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#2FCC71",
+    "background_color": "#333",
+    "display": "standalone"
+  }
