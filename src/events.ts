@@ -1,4 +1,4 @@
-let editing;
+let editing: Editing;
 
 function start () {
     editing = new Editing();
@@ -6,41 +6,41 @@ function start () {
     $("#notes").on("click", ".note", function () {
         editing.chooseNote($(this).attr("id"));
     });
-    
-    
+
+
     $("#subjects").on("click", ".subject", function () {
         editing.chooseSubject($(this).attr("id"));
     })
 
 
-    $("#delete").click(function () {
-        editing.deleteNote(function () {
+    $("#delete").on("click", () => {
+        editing.deleteNote(() => {
             editing.save()
             editing.destroyEditor();
             editing.displayNotes();
         })
     })
-    
+
     $("#subjects").on("click", ".delete", function () {
-        let id = $(this).data("deletes");
-        editing.deleteSubject(id, function () {
+        const id = $(this).data("deletes");
+        editing.deleteSubject(id, () => {
             editing.save();
-            
+
             if (editing.currentSubject === id) {
                 editing.currentSubject = null;
                 editing.currentSubjectLabel = null;
-                
+
                 editing.displaySubjects();
                 editing.destroyEditor()
                 editing.displayNotes()
             }
 
-            $(".subject").first().click();
+            $(".subject").first().trigger("click");
         })
     })
 
-    $("#new-subject").click(function () {
-        editing.createSubject(name, function (id) {
+    $("#new-subject").on("click", () => {
+        editing.createSubject((id: string) => {
             editing.save();
             editing.displaySubjects();
             editing.chooseSubject(id);
@@ -48,39 +48,39 @@ function start () {
     })
 
 
-    $("#new-note").click(function () {
-        editing.createNote(name, function (id) {
+    $("#new-note").on("click", () => {
+        editing.createNote((id: string) => {
             editing.save();
             editing.displayNotes();
             editing.chooseNote(id);
-        })
+        });
     });
-    
+
     $("#subjects").on("click", ".edit", function () {
-        let id = $(this).data("edits");
-        bootbox.prompt("Pick a new name for your subject...", function (result) {
+        const id = $(this).data("edits");
+        bootbox.prompt("Pick a new name for your subject...", (result: string) => {
             if (result !== null) {
-                let name = result;
+                const name = result;
                 editing.data.subjects[editing.currentSubject].name = name;
-                
+
                 editing.save();
                 editing.displaySubjects();
                 editing.chooseSubject(id);
-                
+
                 if (editing.currentNote !== null) {
-                    editing.chooseNote(editing.currentNote);   
+                    editing.chooseNote(editing.currentNote);
                 }
             }
         });
     });
-    
+
     $("#notes").on("click", ".edit", function () {
-        let id = $(this).data("edits");
-        bootbox.prompt("Pick a new name for your note...", function (result) {
+        const id = $(this).data("edits");
+        bootbox.prompt("Pick a new name for your note...", (result: string) => {
             if (result !== null) {
-                let name = result;
+                const name = result;
                 editing.data.subjects[editing.currentSubject].notes[id].name = name;
-                
+
                 editing.save();
                 editing.destroyEditor();
                 editing.displaySubjects();
@@ -91,6 +91,6 @@ function start () {
     });
 
     // Pick top subject
-    $(".subject").first().click();
+    $(".subject").first().trigger("click");
     editing.displayNotes();
 }
